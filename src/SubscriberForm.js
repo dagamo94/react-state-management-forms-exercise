@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function SubscriberForm(){
+function SubscriberForm({createSubscriber}){
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
 
@@ -8,10 +8,8 @@ function SubscriberForm(){
     const handleEmailChange = event => setEmail(event.target.value);
     const handleSubmit = event => {
         event.preventDefault();
-
-        console.log("Name: ", name);
-        console.log("Email: ", email);
-
+        name && email ? console.log("Submitted: ", name, email): console.log("Inputs must not be empty strings and must submit both a name and email");
+        if(name && email) createSubscriber({name, email});
         setName("");
         setEmail("");
     }
@@ -25,7 +23,7 @@ function SubscriberForm(){
                     name="name"
                     type="text"
                     onChange={handleNameChange}
-                    values={name}
+                    value={name}
                 />
             </label>
             <label htmlFor="email">
